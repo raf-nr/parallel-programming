@@ -1,3 +1,3 @@
-module first-task
+module src
 
 go 1.22.1
