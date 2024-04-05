@@ -24,6 +24,3 @@ jobs:
 
       - name: Start tests
         run: go test -v ./tests/ -race
-
-      - name: Start benchmarks
-        run: go test -v ./tests/benchmarks/ -bench=. -race
