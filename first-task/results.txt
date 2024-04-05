@@ -1,0 +1,35 @@
+Benchmark                                  Time (ns/op)
+------------------------------------------------------
+ParallelTraiberStack/Push_All_gorutines    340767958
+ParallelTraiberStack/Pop_All_gorutines     317598292
+ParallelTraiberStack/Push_and_pop_in_sequential_order_All_gorutines 335041805
+ParallelTraiberStack/Push_and_pop_in_sequential_order_8_gorutines 521644084
+ParallelTraiberStack/Push_and_pop_in_sequential_order_100_gorutines 535727270
+ParallelTraiberStack/Push_and_pop_in_sequential_order_in_different_gorutines_All_gorutines 671500708
+ParallelTraiberStack/Push_and_Pop_in_random_order_All_gorutines 339800833
+ParallelTraiberStack/Push_and_Pop_in_random_order_8_gorutines 218598000
+ParallelTraiberStack/Push_and_Pop_in_random_order_100_gorutines 283224854
+ParallelOptimizedTraiberStack/Push_All_gorutines 389618972
+ParallelOptimizedTraiberStack/Pop_All_gorutines 315086906
+ParallelOptimizedTraiberStack/Push_and_pop_in_sequential_order_All_gorutines 367259375
+ParallelOptimizedTraiberStack/Push_and_pop_in_sequential_order_8_gorutines 99213344
+ParallelOptimizedTraiberStack/Push_and_pop_in_sequential_order_100_gorutines 106398488
+ParallelOptimizedTraiberStack/Push_and_pop_in_sequential_order_in_different_gorutines_All_gorutines 742954916
+ParallelOptimizedTraiberStack/Push_and_Pop_in_random_order_All_gorutines 379704958
+ParallelOptimizedTraiberStack/Push_and_Pop_in_random_order_8_gorutines 50145863
+ParallelOptimizedTraiberStack/Push_and_Pop_in_random_order_100_gorutines 55990024
+SequentialConsistentStack/Push 31367806
+SequentialConsistentStack/Pop 24475818
+SequentialConsistentStack/Push_and_pop_in_sequential_order 25782605
+SequentialConsistentStack/Push_and_pop_separately 40389452
+SequentialConsistentStack/Push_and_Pop_in_random_order 24329265
+SequentialTraiberStack/Push 41339842
+SequentialTraiberStack/Pop 24846564
+SequentialTraiberStack/Push_and_pop_in_sequential_order 32244778
+SequentialTraiberStack/Push_and_pop_separately 52099034
+SequentialTraiberStack/Push_and_Pop_in_random_order 27438397
+SequentialOptimizedTraiberStack/Push 53674998
+SequentialOptimizedTraiberStack/Pop 25932842
+SequentialOptimizedTraiberStack/Push_and_pop_in_sequential_order 42924157
+SequentialOptimizedTraiberStack/Push_and_pop_separately 61824910
+SequentialOptimizedTraiberStack/Push_and_Pop_in_random_order 34254784
