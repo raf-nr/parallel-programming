@@ -77,7 +77,7 @@ func runParallelBenchmarks(b *testing.B, newStack func() stacks.Stack[int]) {
 			stack := newStack()
 			wg := sync.WaitGroup{}
 			wg.Add(gorutinesAmount1)
-			for j := 0; j < 100; j++ {
+			for j := 0; j < gorutinesAmount1; j++ {
 				go func() {
 					defer wg.Done()
 					for j := 0; j < elementsAmount/gorutinesAmount1; j++ {
@@ -95,7 +95,7 @@ func runParallelBenchmarks(b *testing.B, newStack func() stacks.Stack[int]) {
 			stack := newStack()
 			wg := sync.WaitGroup{}
 			wg.Add(gorutinesAmount2)
-			for j := 0; j < 100; j++ {
+			for j := 0; j < gorutinesAmount2; j++ {
 				go func() {
 					defer wg.Done()
 					for j := 0; j < elementsAmount/gorutinesAmount2; j++ {
@@ -160,7 +160,7 @@ func runParallelBenchmarks(b *testing.B, newStack func() stacks.Stack[int]) {
 			stack := newStack()
 			wg := sync.WaitGroup{}
 			wg.Add(gorutinesAmount1)
-			for j := 0; j < 100; j++ {
+			for j := 0; j < gorutinesAmount1; j++ {
 				if rand.Intn(2) == 0 {
 					go func() {
 						defer wg.Done()
@@ -186,7 +186,7 @@ func runParallelBenchmarks(b *testing.B, newStack func() stacks.Stack[int]) {
 			stack := newStack()
 			wg := sync.WaitGroup{}
 			wg.Add(gorutinesAmount2)
-			for j := 0; j < 100; j++ {
+			for j := 0; j < gorutinesAmount2; j++ {
 				if rand.Intn(2) == 0 {
 					go func() {
 						defer wg.Done()
