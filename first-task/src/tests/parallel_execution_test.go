@@ -7,6 +7,8 @@ import (
 	"testing"
 )
 
+// In these test cases we are working with thread-safe stacks.
+
 func TestTraiberStackParalell(t *testing.T) {
 	runParallelStackTests(t, auxiliary.FreshTraiberStack)
 }
@@ -17,9 +19,8 @@ func TestOptimizedTraiberStackParallel(t *testing.T) {
 
 func runParallelStackTests(t *testing.T, newStack func() stacks.Stack[int]) {
 
-	elementsAmount := 1_000_000
-
 	t.Run("Test push", func(t *testing.T) {
+		// Check that push works correctly and there is no data race.
 		stack := newStack()
 		wg := sync.WaitGroup{}
 		wg.Add(elementsAmount)
@@ -44,6 +45,7 @@ func runParallelStackTests(t *testing.T, newStack func() stacks.Stack[int]) {
 	})
 
 	t.Run("Test pop on empty stack", func(t *testing.T) {
+		// Check that pop works correctly and there is no data race.
 		stack := newStack()
 		wg := sync.WaitGroup{}
 		wg.Add(elementsAmount)
@@ -68,6 +70,8 @@ func runParallelStackTests(t *testing.T, newStack func() stacks.Stack[int]) {
 	})
 
 	t.Run("Test push and pop", func(t *testing.T) {
+		// First, we launch 1,000,000 goroutines for insertion (each with 1 element),
+		// then how many for deletion.
 		stack := newStack()
 		wg := sync.WaitGroup{}
 		wg.Add(elementsAmount)

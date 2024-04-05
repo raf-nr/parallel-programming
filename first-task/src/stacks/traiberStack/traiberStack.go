@@ -16,17 +16,18 @@ type Stack[T any] struct {
 }
 
 func FreshTraiberStack[T any]() *Stack[T] {
+	// New stack instance.
 	return &Stack[T]{}
 }
 
-func (stack *Stack[T]) IsEmpty() bool {
-	return stack.top.Load() == nil
-}
-
 func (stack *Stack[T]) Peek() (T, error) {
-	if stack.IsEmpty() {
-		var zeroValue T
-		return zeroValue, errors.New(stacks.EmptyStackError)
+
+	if stack == nil {
+		return *(new(T)), errors.New(stacks.StackNilPointerError)
+	}
+
+	if stack.top.Load() == nil {
+		return *(new(T)), errors.New(stacks.EmptyStackError)
 	}
 	return stack.top.Load().value, nil
 }
@@ -46,16 +47,12 @@ func (stack *Stack[T]) Push(value T) error {
 }
 
 func (stack *Stack[T]) Pop() (T, error) {
-	if stack == nil {
-		var zeroValue T
-		return zeroValue, errors.New(stacks.StackNilPointerError)
-	}
 	for {
-		if stack.IsEmpty() {
-			var zeroValue T
-			return zeroValue, errors.New(stacks.EmptyStackError)
-		}
+
 		oldTop := stack.top.Load()
+		if oldTop == nil {
+			return *(new(T)), errors.New(stacks.EmptyStackError)
+		}
 		newTop := oldTop.next.Load()
 		if stack.top.CompareAndSwap(oldTop, newTop) {
 			return oldTop.value, nil

@@ -5,7 +5,6 @@ type Stack[T any] interface {
 	Pop() (T, error)
 	Peek() (T, error)
 	Len() (int, error)
-	IsEmpty() bool
 }
 
 const (

@@ -15,17 +15,13 @@ type Stack[T any] struct {
 }
 
 func FreshConsistentStack[T any]() *Stack[T] {
+	// New stack instance.
 	return &Stack[T]{}
-}
-
-func (stack *Stack[T]) IsEmpty() bool {
-	return stack.top == nil
 }
 
 func (stack *Stack[T]) Peek() (T, error) {
 	if stack.top == nil {
-		var zeroValue T
-		return zeroValue, errors.New(stacks.EmptyStackError)
+		return *(new(T)), errors.New(stacks.EmptyStackError)
 	}
 	return stack.top.value, nil
 }
@@ -41,12 +37,10 @@ func (stack *Stack[T]) Push(value T) error {
 
 func (stack *Stack[T]) Pop() (T, error) {
 	if stack == nil {
-		var zeroValue T
-		return zeroValue, errors.New(stacks.StackNilPointerError)
+		return *(new(T)), errors.New(stacks.StackNilPointerError)
 	}
-	if stack.IsEmpty() {
-		var zeroValue T
-		return zeroValue, errors.New(stacks.EmptyStackError)
+	if stack.top == nil {
+		return *(new(T)), errors.New(stacks.EmptyStackError)
 	}
 	value := stack.top.value
 	stack.top = stack.top.next

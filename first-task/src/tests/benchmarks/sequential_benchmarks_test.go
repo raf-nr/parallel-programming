@@ -7,21 +7,23 @@ import (
 	"testing"
 )
 
+// Metrics are measured for sequential operations with different types of stack.
+
 func BenchmarkSequentialConsistentStack(b *testing.B) {
-	runsStackBenchmarks(b, auxiliary.FreshConsistentStack)
+	runsSequentialBenchmarks(b, auxiliary.FreshConsistentStack)
 }
 
 func BenchmarkSequentialTraiberStack(b *testing.B) {
-	runsStackBenchmarks(b, auxiliary.FreshTraiberStack)
+	runsSequentialBenchmarks(b, auxiliary.FreshTraiberStack)
 }
 
 func BenchmarkSequentialOptimizedTraiberStack(b *testing.B) {
-	runsStackBenchmarks(b, auxiliary.FreshOptimizedTraiberStack)
+	runsSequentialBenchmarks(b, auxiliary.FreshOptimizedTraiberStack)
 }
 
 const elementsAmount = 1_000_000
 
-func runsStackBenchmarks(b *testing.B, newStack func() stacks.Stack[int]) {
+func runsSequentialBenchmarks(b *testing.B, newStack func() stacks.Stack[int]) {
 
 	b.Run("Push", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
@@ -46,6 +48,18 @@ func runsStackBenchmarks(b *testing.B, newStack func() stacks.Stack[int]) {
 			stack := newStack()
 			for j := 0; j < elementsAmount; j++ {
 				stack.Push(j)
+				stack.Pop()
+			}
+		}
+	})
+
+	b.Run("Push and pop separately", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			stack := newStack()
+			for j := 0; j < elementsAmount; j++ {
+				stack.Push(j)
+			}
+			for j := 0; j < elementsAmount; j++ {
 				stack.Pop()
 			}
 		}
