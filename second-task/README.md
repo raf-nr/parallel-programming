@@ -34,7 +34,7 @@
 
 Сначала код компилировался с флагом `-fsanitize=thread`. В результате санитайзер никаких ошибок [не выявил](./santa-claus-problem/results/threadsanitizer.txt).
 
-Затем запускался `valgrind` с флагом `--tool=helgrind`. В результате работы `helgrid` никаких ошибок [не выявил](./santa-claus-problem/results/halgrind.jpg).
+Затем запускался $$valgrind$$ с флагом `--tols=halgrind`. В результате работы $$valgrid$$ никаких ошибок [не выявил](./santa-claus-problem/results/helgrind.jpg).
 
 Таким образом, никаких ошибок в работе программы не выявлено.
 
@@ -47,27 +47,24 @@
 
 В данной реализации мы просто в функции Reindeer отпускаем мьютекс сразу после увелечения глобальной переменной. Однако следом у нас идет чтение этой глобальной переменной. Именно из-за этого могут возникать неожиданные сценарии.
 
-`Thread sanitizer` успешно обнаружил описанную выше гонку данных. Результат [здесь](./santa-claus-problem-data-race-first/results/threadsanitizer.txt).
-
-`Helgrind` также успешно обнаружил описанную выше гонку данных. Результат [здесь](./santa-claus-problem-data-race-first/results/halgrind.jpg).
+$$Thread sanitizer$$ успешно обнаружил описанную выше гонку данных. Результат [здесь](./santa-claus-problem-data-race-first/results/threadsanitizer.txt).
+$$Halgrind$$ также успешно обнаружил описанную выше гонку данных. Результат [здесь](./santa-claus-problem-data-race-first/results/helgrind.jpg).
 
 ### Data race second
 Реализация с гонкой данных представлена [здесь](./santa-claus-problem-data-race-second).
 
 В данной реализации мы заводим новую глобальную переменную, которую функции Санты, эльфов и оленей будут изменять. Однако они делают это обычным инкрементом, без какой-либо синхронизации потоков в данном месте. Тем самым может возникнуть гонка данных.
 
-`Thread sanitizer` успешно обнаружил описанную выше гонку данных. Результат [здесь](./santa-claus-problem-data-race-second/results/threadsanitizer.txt).
-
-`Helgrind` также успешно обнаружил описанную выше гонку данных. Результат [здесь](./santa-claus-problem-data-race-second/results/halgrind.jpg).
+$$Thread sanitizer$$ успешно обнаружил описанную выше гонку данных. Результат [здесь](./santa-claus-problem-data-race-second/results/threadsanitizer.txt).
+$$Halgrind$$ также успешно обнаружил описанную выше гонку данных. Результат [здесь](./santa-claus-problem-data-race-second/results/).
 
 ### Data race third
 Реализация с гонкой данных представлена [здесь](./santa-claus-problem-data-race-third).
 
-На этот раз мы меняем не саму реализацию программы, а реализацию семафоров, которые используются в этой программе. В функции `wait` меняем местами взятие и отпускание мьютекса. В результате программа будет работать неправильно, и в нужном месте у нас не будет блокировки, что приведет к гонке данных.
+На этот раз мы меняем не саму реализацию программы, а реализацию семафоров, которые используются в этой программе. В функции $$wait$$ меняем местами взятие и отпускание мьютекса. В результате программа будет работать неправильно, и в нужном месте у нас не будет блокировки, что приведет к гонке данных.
 
-`Thread sanitizer` успешно обнаружил описанную выше гонку данных. Результат [здесь](./santa-claus-problem-data-race-third/results/threadsanitizer.txt).
-
-`Helgrind` также успешно обнаружил описанную выше гонку данных. Результат [здесь](./santa-claus-problem-data-race-third/results/halgrind.jpg).
+$$Thread sanitizer$$ успешно обнаружил описанную выше гонку данных. Результат [здесь](./santa-claus-problem-data-race-third/results/threadsanitizer.txt).
+$$Halgrind$$ также успешно обнаружил описанную выше гонку данных. Результат [здесь](./santa-claus-problem-data-race-third/results/).
 
 ## Результат
 
