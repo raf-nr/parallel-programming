@@ -32,7 +32,7 @@ void *SantaClaus(void *arg)
 	while (true)
 	{
 		Wait(santaSem);
-		Wait(mutex);
+        Wait(mutex);
 		if (reindeer == N_REINDEER)
 		{
 			printf("Santa Claus: preparing sleigh\n");
@@ -56,11 +56,11 @@ void *Reindeer(void *arg)
 	printf("This is reindeer %d\n", id);
 	while (true)
 	{
-		Wait(mutex);
+        Wait(mutex);
 		reindeer++;
+        Release(mutex);
 		if (reindeer == N_REINDEER)
 			Release(santaSem);
-		Release(mutex);
 		Wait(reindeerSem);
 		printf("Reindeer %d getting hitched\n", id);
 		sleep(20);

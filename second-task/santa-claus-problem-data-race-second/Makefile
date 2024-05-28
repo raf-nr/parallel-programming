@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -g -Wall -Wno-int-to-void-pointer-cast
+CFLAGS = -g -Wall -Wno-int-to-void-pointer-cast -fsanitize=thread -g
 
 INCLUDES = -I/usr/local/include
 LFLAGS=

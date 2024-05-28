@@ -1,0 +1,91 @@
+Santa Claus: Hoho, here I am
+This is reindeer 1
+This is reindeer 2
+This is reindeer 3
+This is reindeer 4
+==================
+WARNING: ThreadSanitizer: data race (pid=6397)
+  Write of size 4 at 0x7b2000000140 by thread T3 (mutexes: write M0):
+    #0 Wait semaphore.c:40 (santaclaus:x86_64+0x100003b4b) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+    #1 Reindeer santaclaus.c:65 (santaclaus:x86_64+0x10000343e) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+
+  Previous read of size 4 at 0x7b2000000140 by thread T2:
+    #0 Wait semaphore.c:43 (santaclaus:x86_64+0x100003bb0) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+    #1 Reindeer santaclaus.c:65 (santaclaus:x86_64+0x10000343e) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+
+  Location is heap block of size 120 at 0x7b2000000100 allocated by main thread:
+    #0 malloc <null>:225434553 (libclang_rt.tsan_osx_dynamic.dylib:x86_64+0x612bc) (BuildId: 274355c2f95a380fbd28ea29d22ba1712400000010000000000a0a0000030d00)
+    #1 CreateSemaphore semaphore.c:16 (santaclaus:x86_64+0x100003903) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+    #2 main santaclaus.c:113 (santaclaus:x86_64+0x1000036ed) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+
+  Mutex M0 (0x7b2000000100) created at:
+    #0 pthread_mutex_init <null>:225434553 (libclang_rt.tsan_osx_dynamic.dylib:x86_64+0x33e45) (BuildId: 274355c2f95a380fbd28ea29d22ba1712400000010000000000a0a0000030d00)
+    #1 CreateSemaphore semaphore.c:18 (santaclaus:x86_64+0x100003953) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+    #2 main santaclaus.c:113 (santaclaus:x86_64+0x1000036ed) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+
+  Thread T3 (tid=138033, running) created by main thread at:
+    #0 pthread_create <null>:225434553 (libclang_rt.tsan_osx_dynamic.dylib:x86_64+0x32b4f) (BuildId: 274355c2f95a380fbd28ea29d22ba1712400000010000000000a0a0000030d00)
+    #1 CreateThread santaclaus.c:14 (santaclaus:x86_64+0x1000031da) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+    #2 main santaclaus.c:121 (santaclaus:x86_64+0x1000037a9) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+
+  Thread T2 (tid=138032, running) created by main thread at:
+    #0 pthread_create <null>:225434553 (libclang_rt.tsan_osx_dynamic.dylib:x86_64+0x32b4f) (BuildId: 274355c2f95a380fbd28ea29d22ba1712400000010000000000a0a0000030d00)
+    #1 CreateThread santaclaus.c:14 (santaclaus:x86_64+0x1000031da) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+    #2 main santaclaus.c:121 (santaclaus:x86_64+0x1000037a9) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+
+SUMMARY: ThreadSanitizer: data race semaphore.c:40 in Wait
+==================
+This is reindeer 5
+This is reindeer 6
+This is reindeer 7
+This is reindeer 8
+This is reindeer 9
+==================
+WARNING: ThreadSanitizer: data race (pid=6397)
+  Write of size 4 at 0x7b20000000c0 by thread T10 (mutexes: write M0):
+    #0 Release semaphore.c:55 (santaclaus:x86_64+0x100003cbb) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+    #1 Reindeer santaclaus.c:63 (santaclaus:x86_64+0x10000340e) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+
+  Previous read of size 4 at 0x7b20000000c0 by thread T1:
+    #0 Wait semaphore.c:43 (santaclaus:x86_64+0x100003bb0) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+    #1 SantaClaus santaclaus.c:34 (santaclaus:x86_64+0x100003282) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+
+  Location is heap block of size 120 at 0x7b2000000080 allocated by main thread:
+    #0 malloc <null>:225434553 (libclang_rt.tsan_osx_dynamic.dylib:x86_64+0x612bc) (BuildId: 274355c2f95a380fbd28ea29d22ba1712400000010000000000a0a0000030d00)
+    #1 CreateSemaphore semaphore.c:16 (santaclaus:x86_64+0x100003903) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+    #2 main santaclaus.c:112 (santaclaus:x86_64+0x1000036c5) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+
+  Mutex M0 (0x7b2000000080) created at:
+    #0 pthread_mutex_init <null>:225434553 (libclang_rt.tsan_osx_dynamic.dylib:x86_64+0x33e45) (BuildId: 274355c2f95a380fbd28ea29d22ba1712400000010000000000a0a0000030d00)
+    #1 CreateSemaphore semaphore.c:18 (santaclaus:x86_64+0x100003953) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+    #2 main santaclaus.c:112 (santaclaus:x86_64+0x1000036c5) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+
+  Thread T10 (tid=138055, running) created by main thread at:
+    #0 pthread_create <null>:225434553 (libclang_rt.tsan_osx_dynamic.dylib:x86_64+0x32b4f) (BuildId: 274355c2f95a380fbd28ea29d22ba1712400000010000000000a0a0000030d00)
+    #1 CreateThread santaclaus.c:14 (santaclaus:x86_64+0x1000031da) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+    #2 main santaclaus.c:121 (santaclaus:x86_64+0x1000037a9) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+
+  Thread T1 (tid=138031, running) created by main thread at:
+    #0 pthread_create <null>:225434553 (libclang_rt.tsan_osx_dynamic.dylib:x86_64+0x32b4f) (BuildId: 274355c2f95a380fbd28ea29d22ba1712400000010000000000a0a0000030d00)
+    #1 CreateThread santaclaus.c:14 (santaclaus:x86_64+0x1000031da) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+    #2 main santaclaus.c:117 (santaclaus:x86_64+0x100003774) (BuildId: 49cd235f53c437d89fc085cc34be11e632000000200000000100000000030d00)
+
+SUMMARY: ThreadSanitizer: data race semaphore.c:55 in Release
+==================
+Santa Claus: preparing sleigh
+Reindeer 4 getting hitched
+This is elve 1
+Elve 1 at work
+This is elve 2
+Elve 2 at work
+This is elve 3
+Elve 3 at work
+This is elve 4
+Elve 4 at work
+This is elve 5
+Elve 5 at work
+This is elve 6
+Elve 6 at work
+This is elve 7
+Elve 7 at work
+This is elve 8
