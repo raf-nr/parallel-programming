@@ -1,0 +1,28 @@
+Santa Claus: Hoho, here I am
+This is reindeer 1
+This is reindeer 2
+This is reindeer 3
+==================
+WARNING: ThreadSanitizer: data race (pid=6018)
+  Write of size 4 at 0x000104c05010 by thread T3:
+    #0 Reindeer santaclaus.c:60 (santaclaus:x86_64+0x1000033d4) (BuildId: 2f1534a337823b04a1f2f4a9757f999b32000000200000000100000000030d00)
+
+  Previous read of size 4 at 0x000104c05010 by thread T2:
+    #0 Reindeer santaclaus.c:62 (santaclaus:x86_64+0x100003401) (BuildId: 2f1534a337823b04a1f2f4a9757f999b32000000200000000100000000030d00)
+
+  Location is global 'reindeer' at 0x000104c05010 (santaclaus+0x100008010)
+
+  Thread T3 (tid=134527, running) created by main thread at:
+    #0 pthread_create <null>:228580281 (libclang_rt.tsan_osx_dynamic.dylib:x86_64+0x32b4f) (BuildId: 274355c2f95a380fbd28ea29d22ba1712400000010000000000a0a0000030d00)
+    #1 CreateThread santaclaus.c:14 (santaclaus:x86_64+0x1000031da) (BuildId: 2f1534a337823b04a1f2f4a9757f999b32000000200000000100000000030d00)
+    #2 main santaclaus.c:118 (santaclaus:x86_64+0x1000037a9) (BuildId: 2f1534a337823b04a1f2f4a9757f999b32000000200000000100000000030d00)
+
+  Thread T2 (tid=134526, running) created by main thread at:
+    #0 pthread_create <null>:228580281 (libclang_rt.tsan_osx_dynamic.dylib:x86_64+0x32b4f) (BuildId: 274355c2f95a380fbd28ea29d22ba1712400000010000000000a0a0000030d00)
+    #1 CreateThread santaclaus.c:14 (santaclaus:x86_64+0x1000031da) (BuildId: 2f1534a337823b04a1f2f4a9757f999b32000000200000000100000000030d00)
+    #2 main santaclaus.c:118 (santaclaus:x86_64+0x1000037a9) (BuildId: 2f1534a337823b04a1f2f4a9757f999b32000000200000000100000000030d00)
+
+SUMMARY: ThreadSanitizer: data race santaclaus.c:60 in Reindeer
+==================
+This is reindeer 4
+This is reindeer 5

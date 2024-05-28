@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -g -Wall -Wno-int-to-void-pointer-cast
+CFLAGS = -g -Wall -Wno-int-to-void-pointer-cast -fsanitize=thread -g
 
 INCLUDES = -I/usr/local/include
 LFLAGS=
@@ -11,7 +11,7 @@ OBJS = $(SRCS:.c=.o)
 
 .PHONY: depend clean
 
-all: santaclaus 
+all: santaclaus
 
 santaclaus: santaclaus.o semaphore.o
 	$(CC) $(CFLAGS) $(INCLUDES) -o santaclaus santaclaus.o semaphore.o $(LFLAGS) $(LIBS)

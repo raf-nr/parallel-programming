@@ -38,13 +38,13 @@ void Wait(semaphore_t sema)
 	int ret = pthread_mutex_lock(&s->mutex);
 	assert(ret == 0);
 	s->value--;
+    ret = pthread_mutex_unlock(&s->mutex);
+    assert(ret == 0);
 	if (s->value < 0)
 	{
 		ret = pthread_cond_wait(&s->queue, &s->mutex);
 		assert(ret == 0);
 	}
-	ret = pthread_mutex_unlock(&s->mutex);
-	assert(ret == 0);
 }
 
 void Release(semaphore_t sema)

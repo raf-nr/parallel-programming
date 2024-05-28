@@ -1,0 +1,34 @@
+Elve 9 at work
+This is elve 10
+Elve 10 at work
+Elve 2: shared data incremented to 2
+Elve 2 at work
+==================
+WARNING: ThreadSanitizer: data race (pid=6292)
+  Write of size 4 at 0x000100f7f024 by thread T13:
+    #0 Elve santaclaus.c:112 (santaclaus:x86_64+0x100003580) (BuildId: d19540223a893a2eb8e03528273f2ab032000000200000000100000000030d00)
+
+  Previous write of size 4 at 0x000100f7f024 by thread T12:
+    #0 Elve santaclaus.c:112 (santaclaus:x86_64+0x100003580) (BuildId: d19540223a893a2eb8e03528273f2ab032000000200000000100000000030d00)
+
+  As if synchronized via sleep:
+    #0 sleep <null>:165665721 (libclang_rt.tsan_osx_dynamic.dylib:x86_64+0x31300) (BuildId: 274355c2f95a380fbd28ea29d22ba1712400000010000000000a0a0000030d00)
+    #1 Elve santaclaus.c:110 (santaclaus:x86_64+0x100003568) (BuildId: d19540223a893a2eb8e03528273f2ab032000000200000000100000000030d00)
+
+  Location is global 'sharedData' at 0x000100f7f024 (santaclaus+0x100008024)
+
+  Thread T13 (tid=137043, running) created by main thread at:
+    #0 pthread_create <null>:165665721 (libclang_rt.tsan_osx_dynamic.dylib:x86_64+0x32b4f) (BuildId: 274355c2f95a380fbd28ea29d22ba1712400000010000000000a0a0000030d00)
+    #1 CreateThread santaclaus.c:14 (santaclaus:x86_64+0x10000307a) (BuildId: d19540223a893a2eb8e03528273f2ab032000000200000000100000000030d00)
+    #2 main santaclaus.c:135 (santaclaus:x86_64+0x10000377a) (BuildId: d19540223a893a2eb8e03528273f2ab032000000200000000100000000030d00)
+
+  Thread T12 (tid=137042, running) created by main thread at:
+    #0 pthread_create <null>:165665721 (libclang_rt.tsan_osx_dynamic.dylib:x86_64+0x32b4f) (BuildId: 274355c2f95a380fbd28ea29d22ba1712400000010000000000a0a0000030d00)
+    #1 CreateThread santaclaus.c:14 (santaclaus:x86_64+0x10000307a) (BuildId: d19540223a893a2eb8e03528273f2ab032000000200000000100000000030d00)
+    #2 main santaclaus.c:135 (santaclaus:x86_64+0x10000377a) (BuildId: d19540223a893a2eb8e03528273f2ab032000000200000000100000000030d00)
+
+SUMMARY: ThreadSanitizer: data race santaclaus.c:112 in Elve
+==================
+Elve 3: shared data incremented to 3
+Elve 3 at work
+Elve 8: shared data incremented to 4
