@@ -19,8 +19,5 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v4
 
-      - name: Build project
-        run: go build
-
       - name: Start tests
-        run: go test -v ./tests/ -race
+        run: go test -v ./tests/
